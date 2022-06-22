@@ -1,6 +1,6 @@
 ---
 title: "Tarea 2-estadisticas policiales 2021"
-author: "Yeimy Navarroo Segura"
+author: "Yeimy Navarro Segura"
 date: '2022-06-22'
 output:
   html_document: default
