@@ -1,0 +1,33 @@
+---
+title: "Tarea 2-estadisticas policiales 2021"
+author: "Yeimy Navarroo Segura"
+date: '2022-06-22'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tarea 2
+## Carga de paquetes
+```{r}
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(plotly)
+library(DT)
+library(readxl)
+library(graphics)
+library(stats)
+```
+
+##
+
+
+
+
+
+
+
+
