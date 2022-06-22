@@ -1,2 +1,2 @@
-# Tarea-2
-Estadísticas policiales 2021
+# Tarea 2
+Gráficos sobre las estadísticas policiales 2021
