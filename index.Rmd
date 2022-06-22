@@ -43,7 +43,7 @@ estadisticas_policiales <-
   mutate(Fecha = as.Date(Fecha, format = "%d/%m/%Y"))
 ```
 
-## Visuallización en forma tabular
+## Visualización en forma tabular
 ```{r}
 estadisticas_policiales %>%
   datatable(options = list(
@@ -52,5 +52,75 @@ estadisticas_policiales %>%
   ))
 ```
 
+## Graficos
+### Gráfico de barras 1
+```{r}
+ggplot2_cantidad_delitos <-
+  estadisticas_policiales %>%
+  count(Delito) %>% 
+  ggplot(aes(x = reorder(Delito, n), y = n)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Gráfico cantidad de delitos por tipo de delito") +
+  xlab("Delito") +
+  ylab("Cantidad de Delitos") +
+  theme_get()
+  
+ggplotly(ggplot2_cantidad_delitos) %>% config(locale = 'es')
+```
 
+### Gráfico de barras 2
+
+```{r}
+estadisticas_policiales <-
+  estadisticas_policiales %>%
+  mutate(mes = format(Fecha, "%B")) %>%
+  select(Delito, Fecha, Víctima, Edad, Género, Provincia, Cantón, mes) %>%
+  mutate(Fecha = as.Date(Fecha, format = "%d/%m/%Y"))
+
+ggplot2_cantidad_delitos_mes <-
+  estadisticas_policiales %>% 
+  ggplot(aes(x = mes)) +
+  geom_bar() +
+  ggtitle("Cantidad de delitos por mes") +
+  xlab("Mes") +
+  ylab("Cantidad de Delitos") +
+  theme_get() 
+
+ggplotly(ggplot2_cantidad_delitos_mes) %>% config(locale = 'es')
+```
+
+### Gráfico de barras 3
+```{r Gráfico barras apiladas}
+ggplot2_delito_genero <-
+  estadisticas_policiales %>%
+  ggplot(aes(x = Delito, fill = Género)) +
+  geom_bar(position = "fill") +
+  ggtitle("Gráfico de tipo de delitos por género") +
+  xlab("proporción de delito por Genéro") +
+  ylab("Delito") +
+  labs(fill = "Género") +
+  theme_get()
+
+ggplotly(ggplot2_delito_genero) %>% config(locale = 'es')
+```
+
+### Gráfico de barras 4
+```{r}
+estadisticas_policiales <-
+  filter(estadisticas_policiales,
+         grepl('HEREDIA|ALAJUELA|CARTAGO|SAN JOSE', Cantón))
+  
+  
+ggplot2_delitos_canton <-
+  ggplot(data = estadisticas_policiales, aes(x = Cantón)) +
+  geom_bar() +
+  ggtitle("Gráfico de la cantidad de delitos por canton") +
+  xlab("Cantones") +
+  ylab("Cantidad de Delitos") +
+  theme_get()
+
+ggplotly(ggplot2_delitos_canton) %>% config(locale = 'es')
+```
+  
+  
 
