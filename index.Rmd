@@ -2,7 +2,9 @@
 title: "Tarea 2-estadisticas policiales 2021"
 author: "Yeimy Navarroo Segura"
 date: '2022-06-22'
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -22,12 +24,33 @@ library(graphics)
 library(stats)
 ```
 
-## Tabla
+## Tabla Dt
+```{r carga del excel}
+estadisticas_policiales <-
+  read_excel("C:/Users/Dell/Documents/I-2022/Procesamiento de Datos Geograficos/Tarea 2/estadisticaspoliciales2021.xls")
+```
 
+## Curación de datos
+```{r cambiar fechas}
+estadisticas_policiales$Fecha <- as.Date(estadisticas_policiales$Fecha, format = "%d/%m/%Y")
+```
 
+## Transformación
+```{r transformación de datos}
+estadisticas_policiales <-
+  estadisticas_policiales %>%
+  select(Delito, Fecha, "Víctima" = Victima, Edad, "Género" = Genero, Provincia, "Cantón" = Canton ) %>%
+  mutate(Fecha = as.Date(Fecha, format = "%d/%m/%Y"))
+```
 
-
-
+## Visuallización en forma tabular
+```{r}
+estadisticas_policiales %>%
+  datatable(options = list(
+    pageLength = 10,
+    language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+  ))
+```
 
 
 
